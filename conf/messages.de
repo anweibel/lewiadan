@@ -1,0 +1,110 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+crud.title=Administration
+crud.home=Home
+crud.blank=Neu
+crud.index.title=Choose the object to edit
+crud.index.objectType=Object type
+crud.index.action=
+crud.index.add=Hinzufügen
+crud.add=&{%s} hinzufügen
+crud.list.title=&{%s}
+crud.list.size=%d &{%s}
+crud.list.totalSize=%d total
+crud.pagination.previous=« Vorher
+crud.pagination.next=Nachher »
+crud.pagination.last=Ende »»
+crud.pagination.first=«« Anfang
+crud.show.title=&{%s} bearbeiten
+crud.save=Speichern
+crud.saveAndContinue=Speichern und weiter bearbeiten
+crud.cancel=Abbrechen
+crud.hasErrors=Bitte die Fehler korrigieren
+crud.blank.title=&{%s} hinzufügen
+crud.saveAndAddAnother=Speichern und einen weiteren Datensatz erstellen
+crud.delete=&{%s} löschen
+crud.created=&{%s} erstellt
+crud.saved=&{%s} gespeichert 
+crud.deleted=&{%s} gelöscht
+crud.delete.error=Konnte den Datensatz nicht löschen
+crud.search=Suchen
+crud.none=(leer)
+crud.selectValue=(Bitte Wert auswählen)
+
+crud.help.required=Erforderlicher Eintrag.
+crud.help.minlength=Minimale Länge %d Zeichen.
+crud.help.maxlength=Maximale Länge %d Zeichen.
+crud.help.email=Gültige E-Mail Adresse.
+crud.help.dateformat=YYYY-MM-DD format.
+crud.help.numeric=Numerischer Wert.
+crud.help.min=Wert muss grösser sein als %d.
+crud.help.future=In der Zukunft.
+crud.help.past=In der Vergangenheit.
+crud.help.after=Nach %s.
+crud.help.before=Bevor %s.
+crud.help.range=Zwischen %d und %d
+
+admin.mitglied=Mitglieder verwalten
+monatsabrechnung=Monatsabrechnung
+import.export=Datenimport / -export
+import=Daten importieren
+export=Daten exportieren
+prefs=Einstellungen
+logout=Logout
+login=Login
+
+validation.plz=Schweizer Postleitzahlen müssen aus genau vier Zahlen bestehen. 
+
+secure.logout=Du bist nun ausgeloggt.
+secure.error=Ohalätz! Unbekannter Benutzername oder Passwort.
+
+mitglied.newPayment=Neue Zahlung erfassen
+
+mitglied=Mitglied
+Mitglied=Mitglied
+
+anrede=Anrede
+name=Name
+name2=Name 2
+vorname=Vorname
+vorname2=Vorname 2
+strasse=Strasse
+postfach=Postfach
+plz=PLZ
+tel1=Tel.
+tel2=Tel. 2
+ort=Ort
+land=Land
+fax=Fax
+email=Email
+email2=Email 2
+memo=Memo
+handy=Handy
+briefanrede=Briefanrede
+mitgliedtype=MitgliedTyp
+
+sympi=SympathisantIn
+abo=AbonnentIn
+admin=Administrativ
+unklar=[unklar]
+
+betrag=Betrag
+datum=Datum
+konto=Konto
+code=Code
+
+frag.zahlung=Zahlung wirklich l&ouml;schen?
+delete=Löschen
+no.payments=Keine Zahlungen
+member.registered=Mitglied erfasst:
+last.changed=Letzte Änderung:
+mitglied.reaktivieren=Mitglied wieder aktivieren
+mitglied.marked.deleted=Dieser Datensatz ist als gel&ouml;scht markiert!
+delete.final=Endg&uuml;ltig l&ouml;schen
+frag.delete.final=Mitglied wirklich l&ouml;schen?
+mitglied.delete.final.reservation=(Nur Mitglieder ohne Zahlungen k&ouml;nnen endg&uuml;ltig gel&ouml;scht werden.)
+mitglied.delete=Mitglied l&ouml;schen
+
+sprache=Sprache
+gross.klein=Gross/Klein

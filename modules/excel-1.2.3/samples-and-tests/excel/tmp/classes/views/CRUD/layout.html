@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="${lang}">
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}" />
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/crud.css'}" />
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/jquery-ui.css'}" />
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.min.css'}" />
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap-responsive.min.css'}" />
+    </head>
+    <body id="crud">
+
+  <div id="gsoaNavBar" class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container" style="width: auto;">
+          <ul class="nav" role="navigation">
+            <li>
+          		<img id="gsoa-logo" src="@{'/public/images/'}/${play.Play.configuration.getProperty('logo')}">
+          	</li>
+          	#{secure.check "loggedin"}
+            <li>
+              <a  href="@{Mitglieder.list()}">&{'admin.mitglied'}</a>
+            </li>
+            <li>
+              <a  href="@{Monatsabrechnung.index()}">&{'monatsabrechnung'}</a>
+            </li>
+            <li>
+            <li class="dropdown">
+              <a id="einstellungen" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">&{'import.export'}<b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="einstellungen">
+              <li><a tabindex="-1" href="@{Adresslisten.list()}">&{'export'}</a></li>
+              <li><a tabindex="-1" href="@{Mitglieder.importData()}">&{'import'}</a></li>
+              <li><a tabindex="-1" href="@{Zahlungen.esrImport()}">ESR-File importieren</a></li>
+               </ul>
+            </li>
+            #{/secure.check}
+            #{secure.check "administrator"}
+            <li class="dropdown">
+              <a id="einstellungen" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">&{'prefs'}<b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="einstellungen">
+                <li><a tabindex="-1" href="@{Kategorien.list()}">Mitglieder-Kategorien</a></li>
+                <li><a tabindex="-1" href="@{Konten.list()}">Konten</a></li>
+                <li><a tabindex="-1" href="@{Zahlungscodes.list()}">Zahlungscodes</a></li>
+                <li><a tabindex="-1" href="@{Postleitzahlen.list()}">Postleitzahlen</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="@{Users.list()}">Userverwaltung</a></li>
+              </ul>
+            </li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+              <a id="lang" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">DE / FR<b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="einstellungen">
+                <li><a tabindex="-1" href="@{Users.changeLang('DE')}">Deutsch</a></li>
+                <li><a tabindex="-1" href="@{Users.changeLang('FR')}">Français</a></li>
+              </ul>
+            </li>
+            #{/secure.check}
+            #{if session.contains('username')}
+              <li><a name="logout" tabindex="-1" href="@{Secure.logout()}" class="pull-right">&{'logout'}</a></li>
+            #{/if}
+            #{else}
+              <li><a tabindex="-1" href="@{Secure.login()}" class="pull-right">&{'login'}</a></li>
+            #{/else}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+#{if !request.controller.equals("Secure")}
+  #{if flash.success}
+            <div class="crudFlash flashSuccess alert alert-success">
+                ${flash.success.raw()}
+            </div>
+  #{/if}
+  #{if flash.error || error}
+            <div class="crudFlash flashError alert alert-error">
+                ${error ?: flash.error.raw()}
+            </div>
+  #{/if}
+#{/if}
+
+        <div id="crudContent">
+#{doLayout /}
+        </div>
+        <br/><br/>
+        <script type="text/javascript">
+        	var plzRoute = #{jsRoute @Postleitzahlen.getOrt(':plz') /};
+        </script>
+        <script src="@{'/public/javascripts/jquery-1.8.3.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/jquery-ui.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/gsoadb.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    </body>
+</html>

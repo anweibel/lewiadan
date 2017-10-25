@@ -1,0 +1,37 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.modelName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.modelName}</h2>
+
+    <div class="objectForm">
+    #{form @Users.create()}
+        <div class="crudField crud_text">
+            <label for="username">
+        	Username
+    		</label>
+    		<input id="username" class="" type="text" name="username" value="" size="50" />
+    	</div>
+        <div class="crudField crud_text">
+            <label for="password">
+        	Passwort
+    		</label>
+    		<input id="password" class="" type="password" name="password" value="" placeholder="Mindestens 8 Zeichen" size="50" />
+    	</div>
+        <div class="crudField crud_boolean">
+            <label for="isAdmin">
+        	Administrator?
+    		</label>
+    		<input id="isAdmin" class="" type="checkbox" name="isAdmin" value="true"  />
+		</div>
+        <p class="crudButtons">
+            <input class="btn btn-primary" type="submit" name="_save" value="User speichern" />
+        </p>
+    #{/form}
+    <div class="crudField crud_text">
+    	Info: "Administratoren" k&ouml;nnen auch die Funktionen im Men&uuml; "Einstellungen" bedienen, normale User nicht.
+    </div>
+    </div>
+
+</div>

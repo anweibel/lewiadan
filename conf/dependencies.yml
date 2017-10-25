@@ -1,0 +1,9 @@
+# Application dependencies
+
+require:
+    - play
+    - play -> crud
+    - play -> secure
+    - play -> excel 1.2.3
+    - be.objectify -> objectify-led 1.6
+    - net.sourceforge.jexcelapi -> jxl 2.6.12

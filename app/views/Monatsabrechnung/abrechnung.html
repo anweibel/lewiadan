@@ -1,0 +1,84 @@
+#{extends 'CRUD/layout.html' /} 
+#{set title:"Abrechnung vom ${start.format('dd.MM.yyyy')} bis zum ${ende.format('dd.MM.yyyy')}" /}
+
+<div >
+	<h2>Abrechnung f&uuml;r den Zeitraum vom ${start.format('dd. MM. yyyy')} 
+	bis zum ${ende.format('dd. MM. yyyy')}</h2>
+	Auswahl: ${sprache}
+</div>
+<div >
+	<h3>Total</h3>
+</div>
+<div id="crudListTable" class="summe">
+		<table>
+			<thead>
+				<tr>
+					<th>Zahlungscode</th>
+					<th>Konto</th>
+					<th class="betrag">Betrag</th>
+				</tr>
+			</thead>
+			<tbody>
+				#{if summen} 
+				#{list summen, as:'summe'}
+				<tr>
+					<td>${summe[0]}</td>
+					<td>${summe[1]}</td>
+					<td class="betrag">${controllers.Monatsabrechnung.zahlenFormat(summe[2])}</td>
+				</tr>
+				#{/list} 
+				<tr>
+					<td />
+					<td><strong>Gesamtsumme</strong></td>
+					<td class="betrag"><strong>${controllers.Monatsabrechnung.zahlenFormat(gesamtsumme)}</strong></td>
+				</tr>
+				#{/if} 
+				#{else}
+				<tr>
+					<td>Keine Zahlungen in diesem Zeitrum</td>
+					<td />
+					<td />
+				</tr>
+				#{/else}
+			</tbody>
+		</table>
+	<br /> <a class="btn btn-primary" href="@{Monatsabrechnung.index()}">Zur&uuml;ck</a>
+</div>
+#{if showDetails} 
+	<h3>Einzelbuchungen</h3>
+	<div id="crudListTable" class="einzelbuchungen">
+		<table>
+			<thead>
+				<tr>
+					<th>Zahlungscode</th>
+					<th>Datum</th>
+					<th>Betrag</th>
+					<th>Mitglied</th>
+					<th>Konto</th>
+					<th>Bemerkung</th>
+				</tr>
+			</thead>
+			<tbody>
+				#{if einzelbuchungen} 
+				#{list einzelbuchungen, as:'zahlung'}
+				<tr>
+					<td>${zahlung.zahlungscode}</td>
+					<td>${zahlung.datum}</td>
+					<td>${zahlung.betrag}</td>
+					<td>${zahlung.mitglied}</td>
+					<td>${zahlung.konto?.name}</td>
+					<td>${zahlung.bemerkung}</td>
+				</tr>
+				#{/list} 
+				#{/if} 
+				#{else}
+				<tr>
+					<td>Keine Zahlungen in diesem Zeitraum</td>
+				</tr>
+				#{/else}
+			</tbody>
+		</table>
+		<br /> <a class="btn btn-primary" href="@{Monatsabrechnung.index()}">Zur&uuml;ck</a>
+	</div>
+#{/if} 
+

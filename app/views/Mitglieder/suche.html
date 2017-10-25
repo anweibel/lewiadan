@@ -1,0 +1,81 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'Mitglieder Suche' /}
+
+<h2>Mitglied suchen</h2>
+	
+<div class="objectForm">
+
+	#{form @Mitglieder.suche(), id:'sucheForm', enctype:'multipart/form-data'}
+	<div class="crudField crud_text">
+	    <label for="vorname">Vorname</label>
+	    <input id="vorname" class="" type="text" name="vorname" value="${vorname}" size="50">  
+	</div>
+	<div class="crudField crud_text">
+	    <label for="name">Nachname</label>
+	    <input id="name" class="" type="text" name="name" value="${name}" size="50">  
+	</div>
+	<div class="crudField crud_text">
+	    <label for="strasse">Strasse</label>
+	    <input id="strasse" class="" type="text" name="strasse" value="${strasse}" size="50">  
+	</div>
+	<div class="crudField crud_text">
+	    <label for="plz">PLZ</label>
+	    <input id="plz" class="" type="text" name="plz" value="${plz}" size="50">  
+	</div>
+	<div class="crudField crud_text">
+	    <label for="ort">Ort</label>
+	    <input id="ort" class="" type="text" name="ort" value="${ort}" size="50">  
+	</div>
+	<div class="crudField crud_text">
+	    <label for="land">Land</label>
+	    <input id="land" class="" type="text" name="land" value="${land}" size="50">  
+	</div>
+	<div class="crudField crud_text">
+	    <label for="memo">Memo</label>
+	    <input id="memo" class="" type="text" name="memo" value="${memo}" size="50">  
+	</div>
+	<p class="crudButtons">
+   		<input class="btn btn-primary" type="submit" value="Suchen">
+	</p>
+   	#{/form}
+</div>
+&nbsp;<span class="label label-info"> Tipp: Das * funktioniert als Wildcard.</span>
+<br/>&nbsp;<br/>
+<div id="crudListTable" class="mitglieder">
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Vorname</th>
+				<th>Strasse</th>
+				<th>PLZ</th>
+				<th>Ort</th>
+				<th>Email</th>
+           	</tr>
+		</thead>
+		<tbody>
+			#{if resultate}
+			#{list resultate, as:'mitglied'}
+				<tr class="${mitglied_parity} #{if mitglied.alert==2}deleted#{/if} suchresultat">
+				<td><a href="@{Mitglieder.show(mitglied.id)}">${mitglied.name}</a></td>
+				<td>${mitglied.vorname}</td>
+				<td>${mitglied.strasse}</td>
+				<td>${mitglied.plz}</td>
+				<td>${mitglied.ort}</td>
+				<td>${mitglied.email}</td>
+				</tr>
+			#{/list}
+			#{/if}
+			#{else}
+				<tr><td>Keine Resultate</td><td/><td/><td/><td/></tr>
+			#{/else}
+		</tbody>	
+	</table>
+	#{if resultate}
+	   <div id="crudListPagination">
+		   <p class="crudCount">
+		   		${resultate.size()} Mitglieder
+			</p>
+		</div>
+	#{/if}
+</div>

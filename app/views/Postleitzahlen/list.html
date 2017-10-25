@@ -1,0 +1,18 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.list.title', type.name) /}
+
+<div id="crudList" class="${type.name}">
+
+	#{suchFeld action:"/crud/postleitzahlen" /}
+    
+    <a class="btn btn-primary addButton" href="@{blank()}">&{'crud.add', type.modelName}</a>   
+
+    <div id="crudListTable">
+        #{crud.table /}
+    </div>
+
+    <div id="crudListPagination">
+        #{crud.pagination /}
+    </div>
+
+</div>

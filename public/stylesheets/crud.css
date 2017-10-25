@@ -1,0 +1,444 @@
+/** Administration area **/
+
+#crud {
+	margin: 0;
+	padding: 0;
+	font-family: 'Helvetica', 'Arial', 'Sans';
+	font-size: 90%;
+	color: #111;
+}
+
+/** Header **/
+
+#crud #crudHeader {
+	background: #111111;
+	padding: 10px 20px;
+}
+
+#crud #crudHeader h1 {
+	margin: 0;
+	font-weight: normal;
+}
+
+#crud #crudHeader h1 a {
+	color: gold;
+	text-decoration: none;
+}
+
+/** Breadcrumb **/
+
+#crudBreadcrumb {
+	padding: 5px 20px;
+	font-size: 80%;
+	border-bottom: 1px solid #ddd;
+}
+
+#crudBreadcrumb ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#crudBreadcrumb li {
+	display: inline;
+}
+
+#crudBreadcrumb a {
+	color: #333;
+}
+
+#crudBreadcrumb li:last-child a {
+	color: #888;
+	text-decoration: none;
+}
+
+/** Flash message **/
+
+.crudFlash {
+	padding: 5px 20px;
+	border-bottom: 1px solid #ddd;
+	color: #fff;
+	margin-top: 50px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.flashError {
+	background: #c00;
+}
+
+.flashSuccess {
+	background: #54BD06;
+}
+
+/** Content **/
+
+#crud #crudContent {
+	padding: 10px 20px;
+	margin-top: 50px;
+}
+
+/** Tables **/
+
+#crud #crudContent table {
+	width: 100%;
+	border: 1px solid #ddd;
+	border-top: none;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+#crud #crudContent table thead tr {
+	background: #BBB;
+}
+
+#crud #crudContent table th {
+	color: #fff;
+	font-weight: bold;
+}
+
+#crud #crudContent table th a {
+	color: #fff;
+	font-weight: bold;
+}
+
+#crud #crudContent table th {
+	text-align: left;
+	padding: 6px 5px;
+}
+
+#crud #crudContent table td {
+	text-align: left;
+	padding: 4px 5px;
+}
+
+#crud #crudContent table td {
+	border-bottom: 1px solid #eee;
+}
+
+#crud #crudContent table tr.even {
+	background: #f9f9f9;
+}
+
+#crud #crudContent table tr:last-child td {
+	border-bottom: 1px solid #ddd;
+}
+
+.crudSortedAsc:after {
+	content: '▼';
+}
+
+.crudSortedDesc:after {
+	content: '▲';
+}
+
+/** Forms **/
+
+form {
+	margin: 0;
+}
+
+input, textarea, select {
+	font-family: 'Helvetica', 'Arial', 'Sans';
+	font-size: 12px;
+}
+
+textarea {
+	padding: 2px;
+}
+
+.objectForm {
+	border: 1px solid #ddd;
+	width: 700px;
+	float: left;
+}
+
+label {
+	display: block;
+	font-weight: bold;
+	width: 20%;
+	float: left;
+	color: #666;
+	cursor: pointer;
+}
+
+.Mitglieder label{
+	width: 80px;
+}
+
+.crudField {
+	padding-left: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #eee;
+	position: relative;
+}
+
+.Mitglieder .crudField {
+	float: left;
+	width: 340px;
+}
+
+.crud_longtext, .crud_relation{
+	width: 97%!important;
+}
+
+.crudField input, .crudField select, .crudField textarea{
+	margin-bottom: 1px!important;
+}
+
+.crud_hidden, .crud_unknown {
+    display: none;
+}
+
+.Mitglieder textarea{
+	width: 557px;
+	height: 50px;
+}
+
+.crudButtons, .crudDelete, .crudDeleteProvisorisch{
+	background: #f4f4f4;
+	margin: 0;
+	padding: 10px;
+	width: 680px;
+}
+
+.Mitglieder .crudButtons {
+	float: left;
+}
+
+.crudField .error {
+	color: #c00;
+	padding-left: 10px;
+	position: absolute;
+	top: 9px;
+	font-size: 80%;
+}
+
+.crudField .hasError {
+	color: #c00;
+}
+
+.crudField select[multiple] {
+	max-height: 100px;
+}
+
+.crudField .crudHelp {
+	display: none;
+	width: 1px;
+}
+
+form .currentAttachment {
+	display: block;
+	font-size: 80%;
+	margin-left: 20%;
+	padding-top: 4px;
+}
+
+form .removeAttachment {
+    display: block;
+    font-size: 80%;
+    margin-left: 20%;
+}
+
+/** Footer **/
+
+#crud #crudFooter {
+	font-size: 80%;
+	color: #aaa;
+	padding: 10px 20px;
+	border-top: 1px dashed #ccc;
+	border-bottom: 1px dashed #ccc;
+	margin-top: 20px;
+}
+
+#crud #crudFooter a {
+	color: #333;
+}
+
+/** Home **/
+
+.crudNew {
+	text-align: right !important;
+}
+
+.crudNew a {
+	background: #54BD06;
+	padding: 2px 10px;
+	font-size: 90%;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	color: #fff !important;
+	text-decoration: none;
+}
+
+.crudNew a:hover {
+	opacity: .8;
+}
+
+/** List **/
+
+#crudList {
+	position: relative;
+}
+
+#crudListAdd a:hover {
+	opacity: .8;
+}
+
+#crudListSearch input[type=text] {
+	float: left;
+	width: 300px;
+	margin-right: 10px;
+}
+
+#crudListSearch{
+	float: left;
+	margin-right: 10px;
+}
+
+#crudListSearch a {
+	color: #111 !important;
+	font-size: 90%;
+}
+
+#crudListPagination {
+	padding: 4px 5px;
+	border: 1px solid #ddd;
+	background: #efefef;
+	border-top: 0;
+	font-size: 90%;
+	position: relative;
+}
+
+#crudListPagination .crudCount {
+	margin: 0;
+}
+
+#crudListPagination .crudPages {
+	margin: 0;
+	position: absolute;
+	right: 5px;
+	top: 4px;
+}
+
+/** Show **/
+
+#crudShow {
+	position: relative;
+}
+
+.crudDelete input:hover {
+	opacity: .7;
+}
+
+.Mitglieder .crudDelete, .Mitglieder .crudDeleteProvisorisch{
+	position: absolute;
+	top: 30px;
+	left: 530px;
+	background-color: none;
+	width: 0px;
+	padding: 0px;
+}
+
+/** Custom **/
+
+.kategorie{
+	margin: 6px;
+	position: relative;
+}
+
+.zahlungen{
+	float: left;
+	margin-left: 50px;
+	width: 35%;
+}
+
+.dates{
+	color: gray;
+	width: 100%;
+	float: left;
+}
+
+.zahlungen li{
+	padding-bottom: 10px;	
+}
+
+.addButton{
+	float: left;
+	margin-right: 10px;
+}
+
+.crudForm{
+	margin-bottom: 0px;
+}
+
+#gsoa-logo{
+	margin-left: 23px;
+	margin-top: 7px;
+	margin-right: 30px;
+}
+
+.Monatsabrechung label{
+	width: 35%;
+}
+
+.summe{
+	width: 500px;
+}
+
+#crud #crudContent .betrag{
+	text-align: right;
+	width: 100px;
+}
+
+.datenexport .objectForm{
+	float: none;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.input-append .btn.dropdown-toggle {
+    float: none;
+}
+
+.Mitglieder .input-append {
+    margin-bottom: 0px;
+}
+
+.Mitglieder .dropdown-menu {
+    left: 150px;
+}
+
+#object_sprache, #object_anrede, #object_briefanrede{
+	width: 168px;
+}
+
+.objectForm h4{
+	margin-left: 10px;
+}
+
+#subtractForm .crudField{
+	line-height: 50px;
+}
+.largeLabel{
+	width: 40%;
+}
+
+#crud #crudContent .Mitglieder table tr.odd.deleted,  #crudListTable.mitglieder table tr.odd.deleted{
+    background-color: #d5d5d5;
+    text-decoration: line-through;
+}
+
+#crud #crudContent .Mitglieder table tr.deleted td,  #crudListTable.mitglieder table tr.deleted td{
+    border-bottom-color: #c9c9c9;
+}
+
+#crud #crudContent .Mitglieder table tr.even.deleted,  #crudListTable.mitglieder table tr.even.suchresultat.deleted {
+    background-color: #ccc!important;
+    text-decoration: line-through;
+}
+
+#grossKlein{
+	margin-left: 10px
+}

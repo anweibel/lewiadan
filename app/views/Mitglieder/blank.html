@@ -1,0 +1,122 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.modelName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.modelName}</h2>
+
+    <div class="objectForm">
+    #{form class:'crudForm', action:@create(), enctype:'multipart/form-data'}
+         #{crud.form}
+        	#{crud.custom 'mitgliedType'}
+             	#{if play.Play.configuration.getProperty('showMitgliedType')?.equals('false')}
+	        	#{/if}
+	        	#{else}	
+		            <label for="object_mitgliedType">
+					    MitgliedType
+					</label>
+					
+					<select id="object_mitgliedType" name="object.mitgliedType">
+					                        <option name="A" ord="0" value="A">A - SympathisantIn</option>
+					                        <option name="D" ord="1" value="D">D - AbonnentIn</option>
+					                        <option name="C" ord="2" value="C">C - Mitglied</option>
+					                        <option name="X" ord="3" value="X">X - Administrativ</option>
+					                        <option name="N" ord="4" value="N">N - [unklar]</option>
+					</select>
+					        
+					<span class="crudHelp"></span>
+				#{/else}
+            #{/crud.custom}
+            
+        	#{crud.custom 'anrede'}
+				<label for="object_anrede">anrede</label>
+        	<div class="input-append btn-group">
+    			<input id="object_anrede" class="" type="text" name="object.anrede" value="" size="50" />
+            	
+    			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+        			<span class="caret"></span>
+    			</a>
+    			<ul class="dropdown-menu">
+        			<li><a href="#">Herr</a></li>
+        			<li><a href="#">Frau</a></li>
+        			<li><a href="#">Firma</a></li>
+        			<li><a href="#">Herr und Frau</a></li>
+        			<li><a href="#">Frau und Herr</a></li>
+        			<li><a href="#">Familie</a></li>
+        			<li class="divider"></li>
+        			<li><a href="#">Herr Dr.</a></li>
+        			<li><a href="#">Frau Dr.</a></li>
+        			<li><a href="#">Herr Dr. med.</a></li>
+        			<li><a href="#">Frau Dr. med.</a></li>
+        			<li class="divider"></li>
+        			<li><a href="#">Herr und Herr</a></li>
+        			<li><a href="#">Frau und Frau</a></li>
+        			<li class="divider"></li>
+        			<li><a href="#">Monsieur</a></li>
+        			<li><a href="#">Madame</a></li>
+        			<li><a href="#">Famille</a></li>
+        			<li><a href="#">Madame et Monsieur</a></li>
+        			<li><a href="#">Monsieur et Madame</a></li>
+        			<li><a href="#">Madame et Madame</a></li>
+        			<li><a href="#">Monsieur et Monsieur</a></li>
+        			<li><a href="#">Entreprise</a></li>
+    			</ul>
+			</div>
+			<span class="crudHelp"></span>		
+        	#{/crud.custom}
+        	#{crud.custom 'briefanrede'}
+				<label for="object_briefanrede">briefanrede</label>
+        	<div class="input-append btn-group">
+    			<input id="object_briefanrede" class="" type="text" name="object.briefanrede" value="" size="50" />
+            	
+    			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+        			<span class="caret"></span>
+    			</a>
+    			<ul class="dropdown-menu">
+        			<li><a href="#">Sehr geehrte Damen und Herren</a></li>
+        			<li><a href="#">Mesdames, Messieurs,</a></li>
+    			</ul>
+			</div>
+			<span class="crudHelp"></span>	
+        	#{/crud.custom}
+
+        	#{crud.custom 'sprache'}
+				<label for="object_sprache">&{'sprache'}</label>
+        	<div class="input-append btn-group">
+    			<input id="object_sprache" class="" type="text" name="object.sprache" value="${object.spracheNice}" size="50" />
+            	
+    			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+        			<span class="caret"></span>
+    			</a>
+    			<ul class="dropdown-menu">
+        			<li><a href="#">Deutsch</a></li>
+        			<li><a href="#">Franc&#x0327;ais</a></li>
+        		</ul>
+        	</div>
+        	#{/crud.custom}
+        	
+            #{crud.custom 'kategorien'}
+        	<label for="kategorien">
+            	&{'kategorien'}
+        	</label>
+	    	<div class="kategorien-list">
+	        	#{list items:models.Kategorie.findAllSorted(), as:'kategorie'}
+	           	<span id="${kategorie.id}" onclick="toggle(this)" 
+	                class="kategorie btn btn-mini">
+	               ${kategorie}
+	           	</span> 
+	            <input id="h${kategorie.id}" type="hidden" name="${fieldName}" 
+	                    value="" />
+	        	#{/list}
+	    	</div>
+    		#{/crud.custom}
+    	#{/crud.form}
+        
+        <p class="crudButtons">
+            <input class="btn btn-primary" type="submit" name="_save" value="&{'crud.save', type.modelName}" />
+            <input class="btn btn-primary" type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+            <input class="btn btn-primary" type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.modelName}" />
+        </p>
+    #{/form}
+    </div>
+</div>

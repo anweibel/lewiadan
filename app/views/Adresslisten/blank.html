@@ -1,0 +1,120 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:"Datenexport" /}
+
+
+<div class="objectForm">
+	#{form @Adresslisten.create(), enctype: "multipart/form-data"}
+	
+		<h4>Name der Adressliste</h4>
+		<div class = "well">
+			<div class="crudField crud_text">
+        	<label for="beschreibung">Beschreibung</label>
+	    		<input id="beschreibung" class="" type="text" name="beschreibung" value="" size="50">
+			</div>
+		</div>
+		
+		<h4>Speichere Adressen in der neuen Adressliste, welche die folgenden Bedingungen erf&uuml;llen</h4>
+		
+		<div class = "well">
+			<div class="crudField crud_text">
+	        <label for="sprache">&{'sprache'}</label>
+    		<select id="sprache" name="sprache">
+	    		<option name="D" id="D">Deutsch</option>
+	    		<option name="F" id="F">Franc&#x0327;ais</option>
+    		</select>
+			</div>
+		</div>
+		
+		<div class = "well">
+			<div class="crudField crud_text">
+	        <label for="land">Land</label>
+	    		<input id="land" class="" type="text" name="land" value="" size="50">
+			</div>
+		</div>
+		
+		<div class = "well">
+			<div class="crudField crud_text">
+	        <label for="plzVon">PLZ von ...</label>
+	    		<input id="plzVon" class="" type="text" name="plzVon" value="" size="50">
+			</div>
+			
+			<div class="crudField crud_text">
+	        <label for="plzBis">PLZ bis ...</label>
+	    		<input id="plzBis" class="" type="text" name="plzBis" value="" size="50">
+			</div>
+		</div>
+		
+		<div class = "well">
+			<div class="crudField crud_date">
+	        <label for="zahlungVon">Zahlungen von ...</label>
+	    		<input id="zahlungVon" class="" type="text" name="zahlungVon" value="" size="50">
+			</div>
+			
+			<div class="crudField crud_date">
+	        <label for="zahlungBis">Zahlungen bis ...</label>
+	    		<input id="zahlungBis" class="" type="text" name="zahlungBis" value="" size="50">
+			</div>
+			
+			<div class="crudField crud_text">
+	        <label for="zahlungSumme">Ergeben mehr als ...</label>
+	    		<input id="zahlungSumme" placeholder="Betrag" type="text" name="zahlungSumme" value="" size="50">
+			</div>
+		</div>
+		
+		<div class = "well">
+			<div class="crudField crud_text">
+	        <label class="largeLabel" for="anzahlBesteSpender">Anzahl beste SpenderInnen</label>
+	    		<input id="anzahlBesteSpender" placeholder="Anzahl" type="text" name="anzahlBesteSpender" value="" size="50">
+			</div>
+		</div>
+		
+		#{if play.Play.configuration.getProperty('showMitgliedType')?.equals('true')}
+			<div class = "well">
+				<div class="crudField crud_enum">
+		        <label class="largeLabel" for="mitgliedType">Nur Mitglieder dieses Typs selektieren</label>
+		    		<select id="mitgliedType" name="mitgliedType">
+		    		<option name="" id=""></option>	
+		    		#{list items:models.MitgliedType.values(), as:'mitgliedType'}
+		    			<option name="${mitgliedType}" id="${mitgliedType}">${mitgliedType}</option>	
+		    		#{/list}
+		    		</select>
+				</div>
+				<div class="crudField crud_boolean">
+		        <label class="largeLabel" for="adminAdressenAusschlissen">Mitgliedertyp X ausschliessen</label>
+		    		<input id="adminAdressenAusschlissen" class="" type="checkbox" name="adminAdressenAusschlissen" checked="checked">
+				</div>
+			</div>
+		#{/if}
+
+	    <div class = "well">
+	    Nur Mitglieder, die in mindestens einer dieser Kategorien sind*:<br/>
+	    	<div class="kategorien-list">
+	        	#{list items:models.Kategorie.findAllSorted(), as:'kategorie'}
+	           	<span id="${kategorie.id}" onclick="toggle(this)" 
+	                class="kategorie btn btn-mini">
+	               ${kategorie}
+	           	</span> 
+	            <input id="h${kategorie.id}" type="hidden" name="kategorie" value="" />
+	        	#{/list}
+	    	</div>
+	    <br/>
+	    <small>* Wenn keine Kategorie ausgew&auml;hlt ist, gibt es keine Einschr&auml;nkung gem&auml;ss der Kategorie.</small>
+	    <br/><br/>
+	    Nur Mitglieder, die in <strong>keiner</strong> dieser Kategorien sind:<br/>
+	    	<div class="kategorien-list">
+	        	#{list items:models.Kategorie.findAllSorted(), as:'kategorie'}
+	           	<span id="ausschluss${kategorie.id}" onclick="toggle(this)" 
+	                class="kategorie btn btn-mini">
+	               ${kategorie}
+	           	</span> 
+	            <input id="hausschluss${kategorie.id}" type="hidden" name="ausschlussKategorie" value="" />
+	        	#{/list}
+	    	</div>
+	    </div>
+	    <p class="crudButtons">
+            <input class="btn btn-primary" type="submit" name="export" value="Adressliste erstellen" />
+        </p>
+	#{/form}
+  </div>
+</div>
+

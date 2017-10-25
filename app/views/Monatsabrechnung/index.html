@@ -1,0 +1,37 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:"Monatsabrechnung" /}
+
+<br/><br/><br/><br/>
+    
+    <div class="row Monatsabrechung">
+    	<div class="span1"></div>
+    	<div class="span4 well ">
+    		<h2>Monatsabrechnung</h2>
+    		#{form @Monatsabrechnung.abrechnung()}
+    		
+    			<div class="crud_date">
+	    			<label for="start">Von:</label>
+	    			<input class="date" id="start" name="start" type="text" value="${von}" />
+	    			
+	    			<label for="ende">Bis:</label>
+	    			<input class="date" id="ende" name="ende" type="text" value="${bis}" />
+    			</div>
+    			
+    			
+    			<label for="sprache">&{'sprache'}</label>
+	    		<select id="sprache" name="sprache">
+	    			<option name="A" id="A">Alle Mitglieder</option>
+		    		<option name="D" id="D">Deutsch</option>
+		    		<option name="F" id="F">Franc&#x0327;ais</option>
+	    		</select>
+	    		<br/>
+    			
+    			<label for="showDetails">Details anzeigen? </label>
+    			<input id="showDetails" name="showDetails" type="checkbox" />
+    			<br/><br/>
+    			<input class="btn btn-primary" type="submit" name="submit" value="Abrechnung HTML" />
+    			<input class="btn btn-primary" type="submit" name="submit" value="Abrechnung XLS" />
+    		#{/form}
+    		<br/>
+    	</div>
+    </div>

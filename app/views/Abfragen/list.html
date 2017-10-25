@@ -1,0 +1,80 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.list.title', type.name) /}
+
+<h2>Hier wir noch gebastelt!</h2>
+<div class="datenexport">
+  <div class="objectForm">
+	#{form @Datenexport.export(), enctype: "multipart/form-data"}
+	
+		<div class="crudField crud_text">
+        <label for="land">Land</label>
+    		<input id="land" class="" type="text" name="land" value="" size="50">
+		</div>
+		
+		<div class="crudField crud_text">
+        <label for="plzVon">PLZ von ...</label>
+    		<input id="plzVon" class="" type="text" name="plzVon" value="" size="50">
+		</div>
+		
+		<div class="crudField crud_text">
+        <label for="plzBis">PLZ bis ...</label>
+    		<input id="plzBis" class="" type="text" name="plzBis" value="" size="50">
+		</div>
+
+		<div class="crudField crud_date">
+        <label for="zahlungVon">Zahlungen von ...</label>
+    		<input id="zahlungVon" class="" type="text" name="zahlungVon" value="" size="50">
+		</div>
+		
+		<div class="crudField crud_date">
+        <label for="zahlungBis">Zahlungen bis ...</label>
+    		<input id="zahlungBis" class="" type="text" name="zahlungBis" value="" size="50">
+		</div>
+		
+		<div class="crudField crud_text">
+        <label for="zahlungSumme">Ergeben mehr als ...</label>
+    		<input id="zahlungSumme" class="" type="text" name="zahlungSumme" value="" size="50">
+		</div>
+		
+		<div class="crudField crud_enum">
+        <label for="mitgliedType">Mitgliedertyp</label>
+    		<select id="mitgliedType" name="mitgliedType">
+    		<option name="" id=""></option>	
+    		#{list items:models.MitgliedType.values(), as:'mitgliedType'}
+    			<option name="${mitgliedType}" id="${mitgliedType}">${mitgliedType}</option>	
+    		#{/list}
+    		</select>
+		</div>
+	    <br/>
+	    <label for="kategorie">Kategorien</label>
+	    	<div class="kategorien-list">
+	        	#{list items:models.Kategorie.findAllSorted(), as:'kategorie'}
+	           	<span id="${kategorie.id}" onclick="toggle(this)" 
+	                class="kategorie btn btn-mini">
+	               ${kategorie}
+	           	</span> 
+	            <input id="h${kategorie.id}" type="hidden" name="kategorie" value="" />
+	        	#{/list}
+	    	</div>
+	    <br/>
+	    <p class="crudButtons">
+            <input class="btn btn-primary" type="submit" name="export" value="Exportieren" />
+        </p>
+	#{/form}
+  </div>
+</div>
+<div id="crudList" class="${type.name}">
+<h2>SQL-Abfragen</h2>
+	#{suchFeld action:"/crud/abfragen" /}
+    
+    <a class="btn btn-primary addButton" href="@{blank()}">&{'crud.add', type.modelName}</a>   
+
+    <div id="crudListTable">
+        #{crud.table /}
+    </div>
+
+    <div id="crudListPagination">
+        #{crud.pagination /}
+    </div>
+
+</div>

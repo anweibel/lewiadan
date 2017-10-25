@@ -1,0 +1,99 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'Daten importieren' /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">Mitglieder-Import aus Exceldatei</h2>
+
+	<div class="row">
+		<div class="alert alert-info span4">
+			Momentan kann man nur .xls-Dateien importieren, keine .xlsx-Dateien. Gegebenenfalls die zu importierende 
+			Datei in Excel mit "Speichern unter..." als "Excel 97-2003 Ablage" (oder so &auml;hnlich) speichern.
+		</div>
+	</div>
+	<div class="row">
+		<div class="alert alert-info span4">
+			Die Spaltentitel in der Excel-Datei m&uuml;ssen genau stimmen, damit die Daten erkannt werden. 
+			<a href="@{'/public/beispiel.xls'}">Hier gibt es eine Beispieldatei.</a>
+		</div>
+	</div>
+		<div class="row">
+		<div class="alert alert-info span4">
+			In der Spalte "Kategorie" kann man den "katshortname" der Kategorie eines Mitglieds eintragen.
+			Falls ein Mitglied in mehrere Kategorien geh&ouml;rt, kann man eine mit Kommas getrennte Liste
+			von Kategorie-Kurznamen in das Feld eintragen. 
+		</div>
+	</div>
+	<div class="row">
+		<div class="well span4">
+		    <form action="@{Mitglieder.uploadMitglieder()}" method="POST"
+		                enctype="multipart/form-data">
+		        <input type="file" id="mitgliederFile" name="mitgliederFile" />
+		        <br/><br/>
+		        <input class="btn btn-primary addButton" type="submit" value="Datei importieren" />
+		    </form>
+	    </div>
+	</div>
+	#{if doppelteMitglieder!= null && doppelteMitglieder.size() > 0}
+		<div class="row">
+			<div class="alert alert-error span4">Bei folgenden zu importierenden Mitgliedern existiert bereits ein Datensatz
+				 mit demselben Vornamen, Namen und Postleitzahl.<br/><br/>
+				 Was nun? &Uuml;berpr&uuml;fe in der untenstehenden Liste, ob die Mitglieder tats&auml;chlich importiert werden sollen.
+				 Falls ein Datensatz nicht importiert werden soll, schreibe beim entsprechenden Datensatz "Ignorieren" in die Spalte "Override Import".
+				 Falls ein Datensatz trotzdem importiert werden soll, schreibe beim entsprechenden Datensatz "Importieren" in die Spalte "Override Import".
+				 (In der <a href="@{'/public/beispiel.xls'}">Beispieldatei</a> ganz rechts hat es Beispiele daf&uuml;r.
+			</div>
+		</div>
+		<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Vorname</th>
+						<th>Strasse</th>
+						<th>PLZ</th>
+						<th>Ort</th>
+						<th>Mitgliedertyp</th>
+					</tr>
+				</thead>
+				#{list items:doppelteMitglieder, as:'mitglied'} 
+					<tr class="${mitglied_parity}">
+						<td><a href="/crud/mitglieder/${mitglied.id}">${mitglied.name}</a></td>
+						<td>${mitglied.vorname}</td>
+						<td>${mitglied.strasse}</td>
+						<td>${mitglied.plz}</td>
+						<td>${mitglied.ort}</td>
+						<td>${mitglied.mitgliedType}</td>
+					</tr>
+				#{/list }
+		</table>
+	#{/if}
+	#{if ungueltigeMitglieder!= null && ungueltigeMitglieder.size() > 0}
+		<div class="row">
+			<div class="alert alert-error span4">Bei folgenden zu importierenden Mitgliedern fehlen Namen, Postleitzahl, Ort, Land oder Briefanrede.<br/><br/>
+				 Was nun? &Uuml;berpr&uuml;fe in der untenstehenden Liste. Eventuell handelt es sich um leere Zeilen ganz zuunterst in der XLS-Datei.
+			</div>
+		</div>
+		<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Vorname</th>
+						<th>Strasse</th>
+						<th>PLZ</th>
+						<th>Ort</th>
+						<th>Mitgliedertyp</th>
+					</tr>
+				</thead>
+				#{list items:ungueltigeMitglieder, as:'mitglied'} 
+					<tr class="${mitglied_parity}">
+						<td><a href="/crud/mitglieder/${mitglied.id}">${mitglied.name}</a></td>
+						<td>${mitglied.vorname}</td>
+						<td>${mitglied.strasse}</td>
+						<td>${mitglied.plz}</td>
+						<td>${mitglied.ort}</td>
+						<td>${mitglied.mitgliedType}</td>
+					</tr>
+				#{/list }
+		</table>
+	#{/if}
+</div>

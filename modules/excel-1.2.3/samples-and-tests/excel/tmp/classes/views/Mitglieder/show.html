@@ -1,0 +1,188 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+	
+    <div class="objectForm">
+	#{if object.alert == 2}
+		<div class="crudFlash flashError alert alert-error">
+			&{'mitglied.marked.deleted='}<br/><br/>&nbsp;
+            <a class="btn btn-danger " href="@{Mitglieder.undelete(object._key())}">&{'mitglied.reaktivieren'}</a>
+        	#{if object.zahlungen.size() == 0}
+	        	<a class="btn btn-danger finalDelete" 
+	        	   href="@{Mitglieder.delete(object._key())}" 
+	        	   data-frage="&{'frag.delete.final'}">
+	        	   &{'delete.final'}</a>
+        	#{/if}
+			#{else}
+				<br/><br/>&nbsp;&{'mitglied.delete.final.reservation'}
+			#{/else}
+    	</div>
+	#{/if}
+	#{else}
+	    #{form @deleteProvisorisch(object._key()), id:'provisorischDeleteForm'}
+        <p class="crudDeleteProvisorisch">
+            <input class="btn btn-danger" type="submit" value="&{'mitglied.delete'}" />
+        </p>
+    	#{/form}
+   	#{/else}
+   	
+   	
+    #{form class:'crudForm', action:@save(object._key()), enctype:'multipart/form-data'}
+        <p class="crudButtons">
+            <input class="btn btn-primary" type="submit" name="_save" value="&{'crud.save', type.modelName}" />
+            <input class="btn btn-primary" type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+            &nbsp;&nbsp;&nbsp;<a href="@{Mitglieder.show(object._key() - 1)}">&lt;</a>  &nbsp;&nbsp;<a href="@{Mitglieder.show(object._key() + 1)}">&gt;</a>
+        </p>
+        #{crud.form}
+            #{crud.custom 'mitgliedType'}
+             	#{if play.Play.configuration.getProperty('showMitgliedType')?.equals('false')}
+	        	#{/if}
+	        	#{else}	
+		            <label for="object_mitgliedType">
+					    &{'mitgliedtype'}
+					</label>
+					
+					<select id="object_mitgliedType" name="object.mitgliedType">
+					                        <option name="A" ord="0" value="A" #{if object.mitgliedType == models.MitgliedType.A}selected="true"#{/if}>A - &{'sympi'}</option>
+					                        <option name="D" ord="1" value="D" #{if object.mitgliedType == models.MitgliedType.D}selected="true"#{/if}>D - &{'abo'}</option>
+					                        <option name="C" ord="2" value="C" #{if object.mitgliedType == models.MitgliedType.C}selected="true"#{/if}>C - &{'mitglied'}</option>
+					                        <option name="X" ord="3" value="X" #{if object.mitgliedType == models.MitgliedType.X}selected="true"#{/if}>X - &{'admin'}</option>
+					                        <option name="N" ord="4" value="N" #{if object.mitgliedType == models.MitgliedType.N}selected="true"#{/if}>N - [&{'unklar'}]</option>
+					</select>
+					        
+					<span class="crudHelp"></span>
+				#{/else}
+            #{/crud.custom}
+
+        	#{crud.custom 'anrede'}
+				<label for="object_anrede">&{'anrede'}</label>
+        	<div class="input-append btn-group">
+    			<input id="object_anrede" class="" type="text" name="object.anrede" value="${object.anrede}" size="50" />
+            	
+    			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+        			<span class="caret"></span>
+    			</a>
+    			<ul class="dropdown-menu">
+        			<li><a href="#">Herr</a></li>
+        			<li><a href="#">Frau</a></li>
+        			<li><a href="#">Firma</a></li>
+        			<li><a href="#">Herr und Frau</a></li>
+        			<li><a href="#">Frau und Herr</a></li>
+        			<li><a href="#">Familie</a></li>
+        			<li class="divider"></li>
+        			<li><a href="#">Herr Dr.</a></li>
+        			<li><a href="#">Frau Dr.</a></li>
+        			<li><a href="#">Herr Dr. med.</a></li>
+        			<li><a href="#">Frau Dr. med.</a></li>
+        			<li class="divider"></li>
+        			<li><a href="#">Herr und Herr</a></li>
+        			<li><a href="#">Frau und Frau</a></li>
+        			<li class="divider"></li>
+        			<li><a href="#">Monsieur</a></li>
+        			<li><a href="#">Madame</a></li>
+        			<li><a href="#">Famille</a></li>
+        			<li><a href="#">Madame et Monsieur</a></li>
+        			<li><a href="#">Monsieur et Madame</a></li>
+        			<li><a href="#">Madame et Madame</a></li>
+        			<li><a href="#">Monsieur et Monsieur</a></li>
+        			<li><a href="#">Entreprise</a></li>
+    			</ul>
+			</div>			
+        	#{/crud.custom}
+        	#{crud.custom 'briefanrede'}
+				<label for="object_briefanrede">&{'briefanrede'}</label>
+        	<div class="input-append btn-group">
+    			<input id="object_briefanrede" class="" type="text" name="object.briefanrede" value="${object.briefanrede}" size="50" />
+            	
+    			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+        			<span class="caret"></span>
+    			</a>
+    			<ul class="dropdown-menu">
+        			<li><a href="#">Sehr geehrte Damen und Herren</a></li>
+        			<li><a href="#">Mesdames, Messieurs,</a></li>
+    			</ul>
+			</div>			
+        	#{/crud.custom}
+        	
+        	#{crud.custom 'sprache'}
+				<label for="object_sprache">&{'sprache'}</label>
+        	<div class="input-append btn-group">
+    			<input id="object_sprache" class="" type="text" name="object.sprache" value="${object.spracheNice}" size="50" />
+            	
+    			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+        			<span class="caret"></span>
+    			</a>
+    			<ul class="dropdown-menu">
+        			<li><a href="#">Deutsch</a></li>
+        			<li><a href="#">Franc&#x0327;ais</a></li>
+        		</ul>
+        		<button id="grossKlein" class="btn btn-primary">&{'gross.klein'}</button>
+        	</div>
+
+        	#{/crud.custom}
+        	        		
+        	#{crud.custom 'kategorien'}
+        	<br/>
+	    	<div class="kategorien-list">
+	        	#{list items:models.Kategorie.findAllSorted(), as:'kategorie'}
+	           	<span id="${kategorie.id}" onclick="toggle(this)" 
+	                class="kategorie ${object.kategorien.contains(kategorie) ? 'selected btn btn-mini btn-primary' : 'btn btn-mini'}">
+	               ${kategorie}
+	           	</span> 
+	            <input id="h${kategorie.id}" type="hidden" name="${fieldName}" 
+	                    value="${object.kategorien.contains(kategorie) ? kategorie.id : ''}" />
+	        	#{/list}
+	    	</div>
+	    	<br/>
+    		#{/crud.custom}
+    	#{/crud.form}
+        <p class="crudButtons">
+            <input class="btn btn-primary" type="submit" name="_save" value="&{'crud.save', type.modelName}" />
+            <input class="btn btn-primary" type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+        </p>
+    #{/form}
+
+    </div>
+	
+    <div class="zahlungen">
+    	<div id="crudListTable">
+			<table>
+    			<thead>
+    				<tr>
+    					<th>&{'betrag'}</th>
+    					<th>&{'datum'}</th>
+    					<th>&{'konto'}</th>
+    					<th>&{'code'}</th>
+    					<th></th>
+                	</tr>
+    			</thead>
+    			<tbody>
+    			#{if object.zahlungen}
+    			#{list object.zahlungen, as:'zahlung'}
+    				<tr>
+    				<td><a href="@{Zahlungen.show(zahlung.id)}">${zahlung.betrag}</a></td>
+    				<td><a href="@{Zahlungen.show(zahlung.id)}">${zahlung.datum?.format('d MMMM yyyy')}</a></td>
+    				<td><a href="@{Zahlungen.show(zahlung.id)}">${zahlung.konto?.name}</a></td>
+    				<td><a href="@{Zahlungen.show(zahlung.id)}">${zahlung.zahlungscode}</a></td>
+    				<td><a href="@{Zahlungen.delete(zahlung.id)}" class="btn btn-danger delZahlung" data-frage="&{'frag.zahlung'}">&{'delete'}</a></td>
+    				</tr>
+    			#{/list}
+    			#{/if}
+    			#{else}
+    				<tr><td>&{'no.payments'}</td><td/><td/><td/><td/></tr>
+    			#{/else}
+				</tbody>	
+			</table>
+    	</div>
+    	<br/>
+		<a class="btn btn-primary" href="@{Zahlungen.blank(object.id)}">&{'mitglied.newPayment'}</a>
+	</div>
+    
+    <div class="dates">
+    	<br/>
+		&{'member.registered'} ${object.erfdatum?.format('d MMMM yyyy')} -
+		&{'last.changed'} ${object.mutdatum?.format('d MMMM yyyy')}
+		<br/><br/><br/>
+	</div>
+</div>

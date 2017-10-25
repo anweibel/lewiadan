@@ -1,0 +1,94 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+
+    <div class="objectForm">
+		<h4>${object.mitglieder.size()} Mitglieder in dieser Liste </h4>
+		
+    	#{form @exportExcel(object._key()), id:'export'}
+    	<p class="crudButtons">
+            <input class="btn btn-primary" type="submit" name="kompakt" value="XLS mit Standardfeldern exportieren" />
+            <input class="btn btn-primary" type="submit" name="full" value="Alle Felder als XLS exportieren" />
+        </p>
+        #{/form}
+        #{form @exportEsr(object._key()), id:'export'}
+        <div class="crudField crud_shorttext">
+        	<label for="versandId">Versand-ID</label>
+    		<input type="text" name="versandId" size="50">
+            <input class="btn btn-primary" type="submit" value="Adressliste f&uuml;r ESR exportieren" />
+            <input type="hidden" name="id" value="${object.id}">
+		</div>            
+        #{/form}	
+		#{form class:'crudForm', action:@save(object._key()), enctype:'multipart/form-data'} 
+					
+		<div class="crudField crud_shorttext">
+			<label for="object_beschreibung">Beschreibung</label>
+			<input id="object_beschreibung" type="text" name="beschreibung" value="${object.beschreibung}" size="500"> <input class="btn btn-primary" type="submit" name="_save" value="&{'crud.save', type.modelName}" /> 
+		</div>
+		
+		<div class="crudField crud_shorttext">
+			<label for="object_datum">Erstellt am</label>
+			<input id="object_datum" type="text" disabled="true" name="object.datum" value="${object.datum?.format('yyyy-MM-dd')}" size="10">
+		</div>
+		
+		<div id="crudListTable">
+			*{<table>
+				<thead>
+					<tr>
+						<th>name</th>
+						<th>vorname</th>
+						<th>strasse</th>
+						<th>plz</th>
+						<th>ort</th>
+						<th>email</th>
+						<th>sprache</th>
+					</tr>
+				</thead>
+				#{list items:object.mitglieder, as:'mitglied'} 
+					<tr class="${mitglied_parity}">
+						<td><a href="/crud/mitglieder/${mitglied.id}">${mitglied.name}</a></td>
+						<td>${mitglied.vorname}</td>
+						<td>${mitglied.strasse}</td>
+						<td>${mitglied.plz}</td>
+						<td>${mitglied.ort}</td>
+						<td>${mitglied.email}</td>
+						<td>${mitglied.sprache}</td>
+					</tr>
+				#{/list }
+				#{if !object.mitglieder}
+					<tr><td>Keine Mitglieder in dieser Liste.</td></tr> 
+				#{/if }
+				</table>}*
+				</div>
+				
+				#{/form}
+	
+				<h4>Eine andere Adressliste von dieser Adressliste subtrahieren</h4>			
+				#{form @subtract(), id:'subtractForm'}
+				<input type="hidden" name="idOrig" value="${object.id}">
+				<div class="crudField crud_shorttext">
+					<label class="largeLabel" for="beschreibung">Beschreibung der resultierenden Adressliste</label>
+					<input id="beschreibung" type="text" name="beschreibung" size="50">
+	    		</div>
+	    		<div class="crudField crud_shorttext">
+	        		<label class="largeLabel" for="idMinus">Diese Adressliste subtrahieren</label>
+	        		<select name="idMinus">
+					#{list items:models.Adressliste.findAllSorted(), as:'adrliste'}
+		           		<option value="${adrliste.id}">${adrliste}</option>
+	        		#{/list}
+					</select>	           	
+	        	</div>
+	        	<p class="crudButtons">
+	        	<input class="btn btn-primary" type="submit" name="_save" value="Subtrahierte Adressliste erstellen" />
+	        	</p>
+	        	#{/form}
+
+		#{form @delete(object._key()), id:'deleteForm'}
+		<p class="crudButtons">
+            <input class="btn btn-danger" type="submit" value="&{'crud.delete', type.modelName}" />
+        </p>
+        #{/form}
+</div>

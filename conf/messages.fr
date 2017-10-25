@@ -1,0 +1,110 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+crud.title=Administration
+crud.home=Home
+crud.blank=Neu
+crud.index.title=Choose the object to edit
+crud.index.objectType=Object type
+crud.index.action=
+crud.index.add=Ajouter
+crud.add=Ajouter &{%s}
+crud.list.title=&{%s}
+crud.list.size=%d &{%s}
+crud.list.totalSize=%d au total
+crud.pagination.previous=« Avant
+crud.pagination.next=Après »
+crud.pagination.last=Fin »»
+crud.pagination.first=«« Début
+crud.show.title=&{%s} éditer
+crud.save=Sauvgarder
+crud.saveAndContinue=Sauvgarder et continuer à éditer
+crud.cancel=Annuler
+crud.hasErrors=Corriger les erreurs s.v.p
+crud.blank.title=Ajouter &{%s}
+crud.saveAndAddAnother=Sauvgarder et ajouter un autre ensemble de données
+crud.delete=&{%s} löschen
+crud.created=&{%s} ajouté
+crud.saved=&{%s} sauvgardé 
+crud.deleted=&{%s} effacé
+crud.delete.error=C'était pas possible d'effacer ces dates
+crud.search=Chercher
+crud.none=(vide)
+crud.selectValue=(Choisissez un valeur)
+
+crud.help.required=Champ doit être completé
+crud.help.minlength=%d caractères au moins.
+crud.help.maxlength=%d caractères au maximum.
+crud.help.email=Adresse courriel valid.
+crud.help.dateformat=Format YYYY-MM-DD.
+crud.help.numeric=Valeur numerique.
+crud.help.min=Valeur doit être plus de %d.
+crud.help.future=Au futur.
+crud.help.past=Dans le passé.
+crud.help.after=Après %s.
+crud.help.before=Avant %s.
+crud.help.range=Entre %d et %d
+
+admin.mitglied=Membres
+monatsabrechnung=Règlement mensuel
+import.export=Importer / exporter
+import=Importer des données
+export=Exporter des données
+prefs=Paramètres
+logout=Déconnexion
+login=Connexion
+
+validation.plz=Code postal doit avoir 4 chiffres. 
+
+secure.logout=Tu es délogué.
+secure.error=Utilisateur et/ou mot de passe inconnu.
+
+mitglied.newPayment=Enregistrer paiement
+
+mitglied=membre
+Mitglied=membre
+
+anrede=Civilité
+name=Nom
+name2=Nom 2
+vorname=Prénom
+vorname2=Prénom 2
+strasse=Rue
+postfach=C.P.
+plz=NPA
+tel1=Tel.
+tel2=Tel. 2
+ort=Localité
+land=Pays
+fax=Fax
+email=Courriel
+email2=Courriel 2
+memo=Memo
+handy=Mobile
+briefanrede=CivilitéLettre
+mitgliedtype=TypeMembre
+
+sympi=Sympathisant
+abo=Abonnement
+admin=Administratif
+unklar=[inconnu]
+
+betrag=Montant
+datum=Date
+konto=Compte
+code=Code
+
+frag.zahlung=Effacer paiement?
+delete=Effacer
+no.payments=Aucun paiement
+member.registered=Membre registré :
+last.changed=Dernier changement :
+mitglied.reaktivieren=Réactiver membre
+mitglied.marked.deleted=Cet ensemble de données est marqué effacé
+delete.final=Effacer définitivement
+frag.delete.final=Effacer membre?
+mitglied.delete.final.reservation=(Seulement des membres sans paiment peuvent être effacés définitivement.)
+mitglied.delete=Effacer membre
+
+sprache=Langue
+gross.klein=Minuscules

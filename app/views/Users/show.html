@@ -1,0 +1,55 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+	
+    <div class="objectForm">
+        <div id="dialog-confirm" title="User l&ouml;schen?">
+	    	<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Willst Du diesen User wirklich l&ouml;schen?</p>
+		</div>
+    #{form @delete(object._key()), id:'deleteForm'}
+        <p class="crudDelete">
+            <input class="btn btn-danger" type="submit" value="&{'crud.delete', type.modelName}" />
+        </p>
+    #{/form}
+    #{form @Users.edit()}
+    	<input id="id" class="" type="hidden" name="id" value="${object.id}"  />
+        <div class="crudField crud_text">
+            <label for="username">
+        	Username
+    		</label>
+    		<input id="username" class="" type="text" name="username" value="${object.username}" size="50" />
+    	</div>
+        <div class="crudField crud_text">
+            <label for="password">
+        	Passwort
+    		</label>
+    		<input id="password" class="" type="password" name="password" placeholder="Mindestens 8 Zeichen" value="" size="50" />
+    	</div>
+    	#{if object.username.equals("admin")}
+    			<input id="isAdmin" class="" type="hidden" name="isAdmin" value="true" />
+    	#{/if}
+    	#{else}
+        <div class="crudField crud_boolean">
+            <label for="isAdmin">
+        	Administrator?
+    		</label>
+    		
+    			<input id="isAdmin" class="" type="checkbox" name="isAdmin" ${object.isAdmin?"checked=checked":""}" />
+		</div>
+    	#{/else}
+        <p class="crudButtons">
+            <input class="btn btn-primary" type="submit" name="_save" value="User speichern" />
+        </p>
+    #{/form}
+    <div class="crudField crud_text">
+    	Info: Das Passwort bleibt das alte, sofern Du kein neues Passwort in das Passwort-Feld f&uuml;llst.
+    </div>
+    <div class="crudField crud_text">
+    	Info: "Administratoren" k&ouml;nnen auch die Funktionen im Men&uuml; "Einstellungen" bedienen, normale User nicht.
+    </div>
+    </div>
+
+</div>

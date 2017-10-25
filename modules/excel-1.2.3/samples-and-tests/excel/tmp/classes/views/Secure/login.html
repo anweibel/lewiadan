@@ -1,0 +1,33 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:"Login" /}
+
+<div id="login">
+	
+	<h1>Login</h1>
+		<br/><br/>
+	#{form @authenticate(), autocomplete: 'off'}
+		
+		#{if flash.error}
+			<p class="error alert alert-error">
+				&{flash.error}
+			</p>
+		#{/if}
+		#{if flash.success}
+			<p class="success alert alert-success">
+				&{flash.success}
+			</p>
+		#{/if}
+	
+		<p id="username-field">
+			<label for="username">&{'secure.username'}</label>
+			<input type="text" name="username" id="username" value="${flash.username}" />
+		</p>
+		<p id="password-field">
+			<label for="password">&{'secure.password'}</label>
+			<input type="password" name="password" id="password" value="" />
+		</p>
+		<p id="signin-field">
+			<input class="btn btn-primary" type="submit" id="signin" value="&{'secure.signin'}" />
+		</p>
+	#{/form}
+</div>
